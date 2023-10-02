@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todos</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="/static/main.js"></script>
+</head>
+<body>
+  <div class="container p-5">
+    <h1>My Todos</h1>
+
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% data.forEach((item, index) => { %>
+            <tr>
+              <td>
+                <%= item.title %>
+              </td>
+              <td>
+                <input type="checkbox"
+                id="<%= item.id %>"
+                <%= item.checked ? "checked" : "" %>
+                onclick="updateTodos('<%= item.id %>')"
+                >
+                <button
+                  type="button"
+                  onclick="deleteTodos('<%= item.id %>')"
+                >delete</button>
+              </td>
+
+            </tr>
+          <% }) %>
+          
+        </tbody>
+
+      </table>
+  
+      <form action="/todo" method="POST">
+        <label for="Title"> Title</label>
+  
+        <input 
+          type="text"
+          id="title"
+          name="title"
+        >
+
+        <button type="submit">Add</button>
+      </form>
+
+  </div>
+</body>
+</html>
